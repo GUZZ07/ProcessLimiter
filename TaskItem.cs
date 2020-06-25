@@ -14,7 +14,6 @@ namespace ProcessLimiter
 	{
 		private static short MaxID = ItemID.Count;
 
-		[JsonConverter(typeof(TaskItemID.IDConvert))]
 		public TaskItemID ID;
 		public int Stack;
 		public byte Prefix;
@@ -76,6 +75,7 @@ namespace ProcessLimiter
 			return new TaskItem(value.ID, value.Stack, value.Prefix);
 		}
 	}
+	[JsonConverter(typeof(IDConvert))]
 	public struct TaskItemID
 	{
 		#region Statics

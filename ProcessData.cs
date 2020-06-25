@@ -27,7 +27,7 @@ namespace ProcessLimiter
 					Name="模板任务",
 					ItemsRequired = new TaskItem[] { (ItemID.Wood, 20 ), ItemID.Gel, (ItemID.Torch, 20) },
 					ItemsToReward = new TaskItem[] { (ItemID.FallenStar, 10) },
-					ItemsBanned = new TaskItem[] { (ItemID.Starfury,1), (ItemID.Minishark,1) },
+					ItemsBanned = new TaskItemID[] { ItemID.Starfury, ItemID.Minishark },
 					NPCsBanned = new int[] { NPCID.EyeofCthulhu }
 				}
 			};
