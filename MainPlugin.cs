@@ -33,17 +33,6 @@ namespace ProcessLimiter
 		public override void Initialize()
 		{
 			Instance = this;
-			if (File.Exists(SavePath))
-			{
-				var text = File.ReadAllText(SavePath);
-				Process = ProcessData.Deserialize(text);
-			}
-			else
-			{
-				Process = new ProcessData();
-				SaveData();
-			}
-			Process.Load();
 			if (!File.Exists(IntroductionPath))
 			{
 				using var file = new FileStream(IntroductionPath, FileMode.Create);
@@ -53,6 +42,7 @@ namespace ProcessLimiter
 				writer.WriteLine(ItemIDs);
 			}
 			ItemIDs = string.Empty;
+			
 
 			ServerApi.Hooks.GameUpdate.Register(this, OnUpdate);
 			Commands.ChatCommands.Add(new Command("processlimiter.use", TaskCmd, "task", "tsks"));
@@ -64,7 +54,36 @@ namespace ProcessLimiter
 
 		private void OnUpdate(object args)
 		{
+			if (Process == null)
+			{
+				if (File.Exists(SavePath))
+				{
+					var text = File.ReadAllText(SavePath);
+					Process = ProcessData.Deserialize(text);
+				}
+				else
+				{
+					Process = new ProcessData();
+					SaveData();
+				}
+				Process.Load();
+			}
 			Process.Update();
+		}
+
+		private void LoadProcess()
+		{
+			if (File.Exists(SavePath))
+			{
+				var text = File.ReadAllText(SavePath);
+				Process = ProcessData.Deserialize(text);
+			}
+			else
+			{
+				Process = new ProcessData();
+				SaveData();
+			}
+			Process.Load();
 		}
 		
 		private void TaskCmd(CommandArgs args)
