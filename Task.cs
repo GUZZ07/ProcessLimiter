@@ -111,7 +111,11 @@ namespace ProcessLimiter
 				TSPlayer.All.SendSuccessMessage($"主线任务#{ID}已完成，奖励详见箱子");
 				if (ItemsBanned != null && ItemsBanned.Length > 0)
 				{
-					var list = string.Join("", ItemsBanned);
+					var list = new StringBuilder(ItemsBanned.Length * 5);
+					for (int i = 0; i < ItemsBanned.Length; i++)
+					{
+						list.AppendFormat("[i:{0}]", ItemsBanned[i].ToString());
+					}
 					TSPlayer.All.SendSuccessMessage($"以下物品已解禁:\n{list}");
 				}
 				checker.SendData(PacketTypes.ChestOpen, "", -1);
