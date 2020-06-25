@@ -18,8 +18,8 @@ namespace ProcessLimiter
 		[JsonProperty(PropertyName = "禁封物品")]		public TaskItemID[] ItemsBanned { get; set; }
 		[JsonProperty(PropertyName = "禁止生成的生物")]	public int[] NPCsBanned { get; set; }
 		[JsonProperty(PropertyName = "任务描述")]		public string CustomDescription { get; set; }
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-		public string Introduction { get; private set; }
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+		internal string Introduction { get; private set; }
 
 		public Task()
 		{
@@ -57,9 +57,14 @@ namespace ProcessLimiter
 			string itemsBanned = string.Empty;
 			if (ItemsBanned != null && ItemsBanned.Length > 0)
 			{
-				itemsBanned = @"
+				var sb = new StringBuilder(@"
 该任务封印的物品: 
-" + string.Join("", ItemsBanned);
+");
+				foreach(var itemban in ItemsBanned)
+				{
+					sb.AppendFormat("[i:{0}]", itemban.ToString());
+				}
+				itemsBanned = sb.ToString();
 			}
 
 

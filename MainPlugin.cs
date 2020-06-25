@@ -56,17 +56,7 @@ namespace ProcessLimiter
 		{
 			if (Process == null)
 			{
-				if (File.Exists(SavePath))
-				{
-					var text = File.ReadAllText(SavePath);
-					Process = ProcessData.Deserialize(text);
-				}
-				else
-				{
-					Process = new ProcessData();
-					SaveData();
-				}
-				Process.Load();
+				LoadProcess();
 			}
 			Process.Update();
 		}
@@ -88,6 +78,10 @@ namespace ProcessLimiter
 		
 		private void TaskCmd(CommandArgs args)
 		{
+			if (Process == null)
+			{
+				LoadProcess();
+			}
 			var player = args.Player;
 			string option;
 			if(args.Parameters.Count ==0)
