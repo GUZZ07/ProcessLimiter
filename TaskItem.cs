@@ -49,11 +49,11 @@ namespace ProcessLimiter
 		{
 			if (Prefix == 0)
 			{
-				return string.Format("[i/s{0}:{1}]", Stack, ID);
+				return string.Format("[i/s{0}:{1}]", Stack, ID.ID);
 			}
 			else
 			{
-				return string.Format("[i/p{0}:{1}]", Prefix, ID);
+				return string.Format("[i/p{0}:{1}]", Prefix, ID.ID);
 			}
 		}
 
