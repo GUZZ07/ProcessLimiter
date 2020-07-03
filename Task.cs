@@ -18,8 +18,8 @@ namespace ProcessLimiter
 		[JsonProperty(PropertyName = "禁封物品")]		public TaskItemID[] ItemsBanned { get; set; }
 		[JsonProperty(PropertyName = "禁止生成的生物")]	public int[] NPCsBanned { get; set; }
 		[JsonProperty(PropertyName = "任务描述")]		public string CustomDescription { get; set; }
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-		internal string Introduction { get; private set; }
+		[JsonIgnore]
+		public string Introduction { get; private set; }
 
 		public Task()
 		{
