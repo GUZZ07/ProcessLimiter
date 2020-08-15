@@ -17,7 +17,7 @@ jobs:
       uses: nuget/setup-nuget@v1
     - name: Restore NuGet packages
       run: |
-        nuget restore Starver.sln
+        nuget restore ProcessLimiter.csproj
     - name: Build
       shell: cmd
       run: |
