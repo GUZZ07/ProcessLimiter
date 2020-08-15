@@ -3,7 +3,6 @@
     <TargetFramework>net48</TargetFramework>
 	<LangVersion>8.0</LangVersion>
   </PropertyGroup>
-  </ItemGroup>
   <ItemGroup>
     <Compile Update="TextResource.Designer.cs">
       <DesignTime>True</DesignTime>
